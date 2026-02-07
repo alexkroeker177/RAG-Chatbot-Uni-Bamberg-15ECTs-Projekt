@@ -1,0 +1,73 @@
+{
+  "departments": [
+    {
+      "name": "Prüfungsamt",
+      "name_en": "Examination Office",
+      "responsibilities": [
+        "Prüfungsanmeldung und technische Probleme bei der Anmeldung",
+        "Zeugnis und Urkunde",
+        "Modulverschiebungen zwischen Modulgruppen",
+        "Notenverbuchung und Prüfungsergebnisse"
+      ],
+      "example_questions": [
+        "Ich kann mich für eine Prüfung nicht anmelden",
+        "Wie bekomme ich mein Zeugnis?",
+        "Ich möchte Module in eine andere Modulgruppe verschieben lassen"
+      ],
+      "website": "https://www.uni-bamberg.de/pruefungsamt/"
+    },
+    {
+      "name": "Studierendenkanzlei",
+      "name_en": "Student Registry",
+      "responsibilities": [
+        "Urlaubssemester beantragen",
+        "Teilzeitstudium",
+        "Einschreibung und Exmatrikulation",
+        "Studienbescheinigungen",
+        "Beurlaubung und Prüfungsleistungen während des Urlaubssemesters"
+      ],
+      "example_questions": [
+        "Wie beantrage ich ein Urlaubssemester?",
+        "Ich möchte Teilzeit studieren",
+        "Welche Prüfungen darf ich im Urlaubssemester ablegen?",
+        "Wie funktioniert die ECTS-Zählung im Teilzeitstudium?"
+      ],
+      "website": "https://www.uni-bamberg.de/studierendenkanzlei/"
+    },
+    {
+      "name": "Fachstudienberatung",
+      "name_en": "Academic Advising",
+      "responsibilities": [
+        "Modulwahl und Studienplanung",
+        "Studienverlaufsberatung",
+        "Anrechnung von Leistungen aus anderen Studiengängen",
+        "Auslandsstudium und Anerkennung",
+        "Welche Prüfungen noch abzulegen sind"
+      ],
+      "example_questions": [
+        "Welche Module soll ich dieses Semester belegen?",
+        "Welche Prüfungen muss ich noch ablegen um meinen Studiengang abzuschließen?",
+        "Kann ich Module aus einem anderen Studiengang anrechnen lassen?",
+        "Ich möchte ein Auslandssemester machen, wie funktioniert die Anerkennung?"
+      ],
+      "website": "https://www.uni-bamberg.de/studienberatung/fachstudienberatung/"
+    },
+    {
+      "name": "Prüfungsausschuss",
+      "name_en": "Examination Committee",
+      "responsibilities": [
+        "Prüfungsordnung und Regelungen",
+        "Härtefallregelungen",
+        "Widersprüche gegen Prüfungsentscheidungen",
+        "Ausnahmegenehmigungen",
+        "Fragen zur Prüfungsordnung und deren Auslegung"
+      ],
+      "example_questions": [
+        "Ich habe eine Frage zur Auslegung der Prüfungsordnung",
+        "Ich möchte einen Härtefallantrag stellen",
+        "Ich möchte Widerspruch gegen eine Prüfungsentscheidung einlegen"
+      ],
+      "website": "https://www.uni-bamberg.de/wiai/pruefungsausschuesse/"
+    }
+  ]
+}

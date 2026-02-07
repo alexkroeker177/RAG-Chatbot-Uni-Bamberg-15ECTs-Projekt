@@ -1,0 +1,38 @@
+# Python 3.12+ required
+
+# LangChain ecosystem
+langchain==0.3.0
+langchain-community==0.3.0
+langchain-core==0.3.0
+langchain-text-splitters==0.3.0
+
+# Vector database
+chromadb==0.5.0
+
+# Document processing
+pypdf==4.3.1
+langdetect==1.0.9
+
+# Evaluation
+ragas>=0.1.20
+datasets>=2.20.0
+
+# UI
+streamlit==1.38.0
+
+# Utilities
+pydantic==2.9.0
+pydantic-settings==2.5.0
+PyYAML==6.0.2
+python-dotenv==1.0.1
+tqdm==4.66.5
+
+# Data processing
+pandas>=2.2.3
+numpy>=1.26.4
+
+# Logging
+colorlog==6.8.2
+
+# HTTP requests
+requests==2.32.3

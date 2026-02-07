@@ -1,0 +1,56 @@
+# RAG System Configuration
+# Copy this file to config.yaml and update with your settings
+
+# Ollama server configuration
+ollama:
+  base_url: "http://ursa.ds.uni-bamberg.de:11434"
+  generation_model: "deepseek-r1:70b"  # Options: deepseek-r1:70b, deepseek-r1:14b, llama3.1:70b, mistral:7b
+  embedding_model: "bge-m3:latest"     # Options: bge-m3:latest, mxbai-embed-large:latest, nomic-embed-text
+  temperature: 0.1
+  max_tokens: 2048
+
+# Chroma vector database configuration
+chroma:
+  persist_directory: "./chroma_db"
+  collection_name: "wiai-regs-2024-11"
+  distance_metric: "cosine"
+
+# Retrieval configuration
+retrieval:
+  fetch_k: 40        # Number of candidates to fetch
+  final_k: 6         # Number of final results to return
+  search_type: "mmr" # Maximal Marginal Relevance
+  lambda_mult: 0.5   # MMR diversity parameter (0=max diversity, 1=max relevance)
+
+# Text chunking configuration
+chunking:
+  chunk_size: 900    # Approximate tokens per chunk
+  chunk_overlap: 120 # Token overlap between chunks
+
+# Data source paths
+data:
+  pdf_directory: "./Studienordnungen"
+  faq_file: "./QA.json"
+  departments_file: "./departments.json"
+
+# Logging configuration
+logging:
+  level: "DEBUG"     # Options: DEBUG, INFO, WARNING, ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "rag_system.log"
+
+# Intent classification configuration
+intent_classification:
+  enabled: true                      # Enable/disable intent classification
+  model: "qwen2.5:14b"               # Lightweight model for fast classification
+  conversational_model: "deepseek-llm:67b"  # Fast model for conversational responses
+  confidence_threshold: 0.7          # Below this, default to query intent (0.0-1.0)
+  timeout: 2.0                       # Maximum seconds for classification
+  fallback_to_query: true            # Treat uncertain messages as queries
+
+# Evaluation pipeline configuration (optional)
+evaluation:
+  evaluation_model: "deepseek-llm:67b"  # Ollama model for question variations
+  judge_model: "deepseek-llm:67b"       # Ollama model for LLM-as-Judge
+  output_directory: "./evaluation_output"
+  variations_per_question: 6              # Number of variations per FAQ question

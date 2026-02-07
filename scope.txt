@@ -1,0 +1,24 @@
+This Bachelor/Master thesis project aims to build a RAG-based chatbot to answer questions about university examination regulations. The goal is to make these often complex legal documents more accessible to students through a natural language interface, similar to ChatGPT.
+
+
+Key Details
+Technology: The core technology is Retrieval Augmented Generation (RAG). This involves a retrieval step to find relevant document sections before a large language model generates an answer.
+
+Project Scope: The project involves three main parts:
+
+A literature review on current RAG techniques, specifically those that provide source document links.
+
+
+Applying selected techniques to create a question-answering system for the examination regulations of the Faculty of Information Systems and Applied Computer Sciences (WIAI).
+
+
+Evaluating the performance of the chosen techniques.
+
+
+Prerequisites: You need solid programming skills and a strong interest in machine learning and NLP.
+
+
+
+Collaboration: The project will be done in collaboration with the examination board for Computer Science and Applied Computer Science.
+
+Contact: The contact person for this thesis is Prof. Dr. Stefan Ultes
