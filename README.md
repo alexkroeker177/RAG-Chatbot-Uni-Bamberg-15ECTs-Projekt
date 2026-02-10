@@ -117,6 +117,12 @@ Web-based chat interface:
 streamlit run v1/ui.py
 ```
 
+With debug mode (shows sources, R1 thinking tokens, and debug info):
+
+```bash
+streamlit run v1/ui.py -- --debug
+```
+
 Access at http://localhost:8501
 
 ### Evaluation

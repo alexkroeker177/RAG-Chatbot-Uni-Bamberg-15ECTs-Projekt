@@ -22,6 +22,8 @@ from v1.generation.rag_chain import RAGChain
 
 logger = setup_logger(__name__)
 
+# Debug mode: enabled with `streamlit run v1/ui.py -- --debug`
+DEBUG_MODE = "--debug" in sys.argv
 
 # Page configuration
 st.set_page_config(
@@ -67,8 +69,8 @@ def display_message(role: str, content: str, sources: list = None):
     """Display a chat message with optional sources."""
     with st.chat_message(role):
         st.markdown(content)
-        
-        if sources:
+
+        if DEBUG_MODE and sources:
             with st.expander("📚 Quellen anzeigen"):
                 for src in sources:
                     page_info = f", Seite {src['page']}" if src['page'] != 'n/a' else ""
@@ -375,9 +377,25 @@ Bitte gib zunächst deine Studieninformationen an, damit ich dir besser helfen k
                 # Stream the answer
                 for chunk in answer_stream:
                     full_response += chunk
-                    message_placeholder.markdown(full_response + "▌")
-                
-                # Remove cursor
+                    if DEBUG_MODE:
+                        message_placeholder.markdown(full_response + "▌")
+                    else:
+                        # Strip <think>...</think> blocks from R1 models
+                        if "</think>" in full_response:
+                            display_text = full_response.split("</think>", 1)[1].strip()
+                        elif "<think>" in full_response:
+                            display_text = ""
+                        else:
+                            display_text = full_response
+                        if display_text:
+                            message_placeholder.markdown(display_text + "▌")
+
+                # Final display without cursor
+                if not DEBUG_MODE:
+                    if "</think>" in full_response:
+                        full_response = full_response.split("</think>", 1)[1].strip()
+                    elif "<think>" in full_response:
+                        full_response = full_response.split("<think>", 1)[0].strip()
                 message_placeholder.markdown(full_response)
                 
                 # Get metadata (Conv-BDI format)
@@ -407,29 +425,25 @@ Bitte gib zunächst deine Studieninformationen an, damit ich dir besser helfen k
                         if beliefs.semester:
                             st.session_state.user_context["semester"] = beliefs.semester
                 
-                # Display sources if available
-                if sources:
-                    with sources_placeholder.expander("📚 Quellen anzeigen"):
-                        for src in sources:
-                            page_info = f", Seite {src['page']}" if src['page'] != 'n/a' else ""
-                            st.markdown(f"• **{src['doc']}**{page_info}")
-                
-                # Show debug info in expander
-                try:
-                    config = load_config()
-                    if config.logging.level == "DEBUG":
-                        with debug_placeholder.expander("🔍 Debug Info"):
-                            st.write(f"**Intention:** {intent}")
-                            st.write(f"**Confidence:** {confidence:.2f}")
-                            if metadata.get('reasoning'):
-                                st.write(f"**Reasoning:** {metadata['reasoning'][:100]}...")
-                            if beliefs:
-                                if isinstance(beliefs, dict):
-                                    st.write(f"**Beliefs:** {beliefs}")
-                                else:
-                                    st.write(f"**Beliefs:** {beliefs.degree} {beliefs.program} Semester {beliefs.semester}")
-                except:
-                    pass
+                if DEBUG_MODE:
+                    # Display sources if available
+                    if sources:
+                        with sources_placeholder.expander("📚 Quellen anzeigen"):
+                            for src in sources:
+                                page_info = f", Seite {src['page']}" if src['page'] != 'n/a' else ""
+                                st.markdown(f"• **{src['doc']}**{page_info}")
+
+                    # Show debug info in expander
+                    with debug_placeholder.expander("🔍 Debug Info"):
+                        st.write(f"**Intention:** {intent}")
+                        st.write(f"**Confidence:** {confidence:.2f}")
+                        if metadata.get('reasoning'):
+                            st.write(f"**Reasoning:** {metadata['reasoning'][:100]}...")
+                        if beliefs:
+                            if isinstance(beliefs, dict):
+                                st.write(f"**Beliefs:** {beliefs}")
+                            else:
+                                st.write(f"**Beliefs:** {beliefs.degree} {beliefs.program} Semester {beliefs.semester}")
                 
                 # Add assistant message to history
                 st.session_state.messages.append({
