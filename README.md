@@ -12,7 +12,7 @@ This system combines document retrieval with large language model generation to 
 - **Semantic search**: Dense vector retrieval with MMR for diverse results
 - **Grounded answers**: Strict citation requirements with source references
 - **Department routing**: Automatically directs students to appropriate university offices
-- **Multiple interfaces**: CLI and Streamlit web UI
+- **Streamlit web UI**: Interactive chat interface
 - **Evaluation framework**: RAGAS metrics for performance assessment
 
 ## Architecture
@@ -24,7 +24,7 @@ v1/
 ├── retrieval/      # Vector store and retrieval engine
 ├── generation/     # LLM interface and prompts
 ├── evaluation/     # RAGAS evaluation
-└── ui/             # CLI and Streamlit interfaces
+└── ui/             # Streamlit interface
 ```
 
 ## Prerequisites
@@ -90,7 +90,7 @@ Ensure the following files/directories exist:
 Process documents and populate the vector database:
 
 ```bash
-python v1/ingest.py
+python -m v1.ingest
 ```
 
 This will:
@@ -98,16 +98,6 @@ This will:
 - Process FAQ and department data
 - Generate embeddings
 - Store in Chroma vector database
-
-### CLI Chat
-
-Interactive command-line interface:
-
-```bash
-python v1/chat.py
-```
-
-Type your questions and receive streaming responses. Type `exit` or `quit` to end.
 
 ### Streamlit UI
 
@@ -130,7 +120,7 @@ Access at http://localhost:8501
 Run RAGAS evaluation on test dataset:
 
 ```bash
-python v1/evaluate.py
+python -m v1.evaluate
 ```
 
 Results will be saved to CSV and Markdown reports.
@@ -172,7 +162,7 @@ source venv/bin/activate  # macOS/Linux
 If you encounter database errors, try deleting and recreating:
 ```bash
 rm -rf chroma_db/
-python v1/ingest.py
+python -m v1.ingest
 ```
 
 ## Project Structure
@@ -185,7 +175,7 @@ python v1/ingest.py
 │   ├── retrieval/               # Vector store and search
 │   ├── generation/              # LLM and prompts
 │   ├── evaluation/              # RAGAS metrics
-│   └── ui/                      # User interfaces
+│   └── ui/                      # Streamlit interface
 ├── Studienordnungen/            # PDF documents
 ├── chroma_db/                   # Vector database (generated)
 ├── QA.json                      # FAQ data
